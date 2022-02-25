@@ -18,24 +18,20 @@ void readNames()
     int t=5;
     while(t--)
     {
-        student_record *temp=TAIL;
         srecord=(student_record *)malloc(sizeof(student_record));
+        srecord->prev=TAIL;
         char tempname[100];
         scanf("%s",tempname);
         scanf("%d",&(srecord->marks));
         srecord->name = (char *)malloc(strlen(tempname)+1);
         strcpy(srecord->name,tempname);
-        if(HEAD!=NULL)
-        {  
-            TAIL->next=srecord;
-        }
+    /*  if(HEAD!=NULL)
+            TAIL->next=srecord;*/
         if(HEAD==NULL)
-        {
             HEAD=srecord;
-            HEAD->prev=NULL;
-        }
+        else
+            TAIL->next=srecord;
         TAIL=srecord;
-        TAIL->prev=temp;
     }
     TAIL->next=NULL;
 }
@@ -53,7 +49,7 @@ void printNames()
         printf("%s%5d \t\t", curNode->name, curNode->marks);
         if((curNode->prev)==NULL)
         {
-            printf("NULL\t\t");
+            printf("NULL\t\t\t");
         }
         if((curNode->prev)!=NULL)
             printf("%s%5d\t\t", (curNode->prev)->name, (curNode->prev)->marks);
